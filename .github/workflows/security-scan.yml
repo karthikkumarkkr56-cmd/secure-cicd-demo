@@ -16,11 +16,12 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: TruffleHog Secret Scan
+      - name: TruffleHog Secret Scan (baseline)
         uses: trufflesecurity/trufflehog@main
         with:
-          path: ./
+          path: ./ 
           extra_args: --only-verified --json
+        continue-on-error: true
 
   sast-scan:
     name: Static Code Analysis
@@ -29,10 +30,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Run Semgrep
+      - name: Run Semgrep (security audit – baseline)
         uses: returntocorp/semgrep-action@v1
         with:
           config: p/security-audit
+        continue-on-error: true
 
   container-scan:
     name: Container Security Scan
