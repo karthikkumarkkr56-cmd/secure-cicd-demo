@@ -73,4 +73,5 @@ jobs:
         with:
           target: ${{ secrets.DAST_TARGET_URL }}
           cmd_options: "-a"
-
+          allow_issue_writing: false
+          fail_action: false
